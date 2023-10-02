@@ -1,25 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-
-
 const {
-    startRecording,
-    startStreamRecording,
-    stopRecordingAndSaveFile,
-    streamVideo,
-} = require('../controllers/screenController');
+  startRecording,
+  streamRecordingData,
+  stopRecordingAndSave,
+  streamRecordedVideo,
+} = require("../controllers/screenController");
 
-
-// start recording
-router.get('/start', startRecording);
+// Start recording
+router.post("/start-recording", startRecording);
 
 // Stream recording data
-router.post('/stream-recording/:requestID', startStreamRecording);
+router.post("/stream-recording/:sessionID", streamRecordingData);
 
-// stop recording and save file
-router.post('/stop-recording/:sessionID', stopRecordingAndSaveFile);
+// Stop recording and save the file
+router.post("/stop-recording/:sessionID", stopRecordingAndSave);
 
-// stream video
-router.get('/stream-video/:sessionID', streamVideo);
+//  stream video
+router.get("/stream/:sessionID", streamRecordedVideo);
 
 module.exports = router;
